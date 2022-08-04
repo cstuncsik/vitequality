@@ -4,15 +4,18 @@ module.exports = {
     node: true
   },
   extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'plugin:vue/vue3-essential',
+    '@vue/eslint-config-typescript/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    'plugin:prettier/recommended',
-    'plugin:vue/vue3-essential',
-    '@vue/eslint-config-typescript/recommended'
+    'plugin:promise/recommended'
   ],
-  plugins: ['unused-imports'],
+  plugins: ['unused-imports', 'promise'],
   settings: {
     'import/resolver': {
       alias: {
@@ -25,11 +28,7 @@ module.exports = {
     ecmaVersion: 2020
   },
   rules: {
-    'no-var': 'error',
-    'no-undef': 'off',
-    'no-unused-vars': 'off',
     'require-await': 'error',
-    'prefer-const': ['error', { destructuring: 'all' }],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'prettier/prettier': [
@@ -75,6 +74,12 @@ module.exports = {
       files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
       env: {
         jest: true
+      }
+    },
+    {
+      files: ['tests/**/*.ts'],
+      rules: {
+        'no-restricted-imports': 'off'
       }
     }
   ]
